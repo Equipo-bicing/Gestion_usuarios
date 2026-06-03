@@ -193,7 +193,7 @@ DROP TABLE IF EXISTS `mydb`.`Pais` ;
 
 CREATE TABLE IF NOT EXISTS `mydb`.`Pais` (
   `idPais` INT NOT NULL AUTO_INCREMENT,
-  `Nom_pais` VARCHAR(45) NOT NULL,
+  `Nom_pais` VARCHAR(120) NOT NULL,
   PRIMARY KEY (`idPais`))
 ENGINE = InnoDB;
 
