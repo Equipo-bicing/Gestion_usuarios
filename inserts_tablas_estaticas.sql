@@ -9,7 +9,7 @@ INSERT INTO Motiu_baixa (Nom_motiu_baixa)
 VALUES ('Quotes impagades'),
     ('Fan altres activitats'),
     ('Comportament disruptiu'),
-    ('La família no vol que segueixi veï'),
+    ('La família no vol que segueixi veí'),
     ('Falta assistència recurrent'),
     ('L''infant no vol tornar'),
     ('Canvi de centre'),
@@ -17,7 +17,7 @@ VALUES ('Quotes impagades'),
     ('Desemparament'),
     ('Altres');
 INSERT INTO Risc (Nivel)
-VALUES ('No risc'),
+VALUES ('Sense risc'),
     ('Lleu'),
     ('Moderat'),
     ('Alt');
@@ -251,8 +251,8 @@ VALUES ('Paisos Baixos'),
     ('Zimbabue');
 INSERT INTO Situacio_economica (Nom)
 VALUES ('Jubilat/ada'),
-    ('En situacio de dependencia'),
-    ('Sense permis de treball'),
+    ('En situació de dependència'),
+    ('Sense permís de treball'),
     ('Economia submergida'),
     ('Treballs reproductius (cures)');
 INSERT INTO Rol (Nom_rol)
@@ -275,8 +275,8 @@ VALUES ('SEBAS 1'),
     ('SEBAS 7'),
     ('Model SIS');
 INSERT INTO Necessitats_especials (Nom_necessitat)
-VALUES ('Amb diagnostic'),
-    ('En proces de diagnostic'),
+VALUES ('Amb diagnòstic'),
+    ('En procés de diagnòstic'),
     ('No NESE'),
     ('Sospita');
 INSERT INTO Curs_actual (Nom)
@@ -310,12 +310,12 @@ VALUES ('Lloguer'),
     ('Hipoteca'),
     ('Ocupacio'),
     ('Compartit'),
-    ('Habitatge d''emergencia'),
+    ('Habitatge d''emergència'),
     ('Recurs residencial'),
     ('Altres');
 INSERT INTO Genere (Nom_genere)
-VALUES ('Masculi'),
-    ('Femeni'),
+VALUES ('Masculí'),
+    ('Femení'),
     ('Non binari');
 INSERT INTO `Estructura_familiar` (`Nom_est_fam`)
 VALUES ('biparental'),
