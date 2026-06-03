@@ -313,3 +313,7 @@ VALUES ('Lloguer'),
     ('Habitatge d''emergencia'),
     ('Recurs residencial'),
     ('Altres');
+INSERT INTO Genere (Nom_genere)
+VALUES ('Masculi'),
+    ('Femeni'),
+    ('Non binari');

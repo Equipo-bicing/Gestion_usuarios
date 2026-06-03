@@ -100,10 +100,10 @@ ENGINE = InnoDB;
 DROP TABLE IF EXISTS `mydb`.`Domicili` ;
 
 CREATE TABLE IF NOT EXISTS `mydb`.`Domicili` (
-  `idDomicil` INT NOT NULL AUTO_INCREMENT,
+  `idDomicili` INT NOT NULL AUTO_INCREMENT,
   `Tipus_domicili` INT NOT NULL,
   `Direccio` INT NOT NULL,
-  PRIMARY KEY (`idDomicil`, `Tipus_domicili`, `Direccio`),
+  PRIMARY KEY (`idDomicili`, `Tipus_domicili`, `Direccio`),
   CONSTRAINT `fk_Domicilio_Tipo_domicilio`
     FOREIGN KEY (`Tipus_domicili`)
     REFERENCES `mydb`.`Tipus_domicili` (`idTipus_domicili`)
@@ -166,12 +166,12 @@ DROP TABLE IF EXISTS `mydb`.`Familia` ;
 CREATE TABLE IF NOT EXISTS `mydb`.`Familia` (
   `idFamilia` INT NOT NULL AUTO_INCREMENT,
   `Cognom_familiar` VARCHAR(45) NOT NULL,
-  `idDomicilio` INT NOT NULL,
+  `idDomicili` INT NOT NULL,
   `Estructura_familiar` INT NOT NULL,
-  PRIMARY KEY (`idFamilia`, `idDomicilio`, `Estructura_familiar`),
+  PRIMARY KEY (`idFamilia`, `idDomicili`, `Estructura_familiar`),
   CONSTRAINT `fk_Familias_Domicilio1`
-    FOREIGN KEY (`idDomicilio`)
-    REFERENCES `mydb`.`Domicili` (`idDomicil`)
+    FOREIGN KEY (`idDomicili`)
+    REFERENCES `mydb`.`Domicili` (`idDomicili`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_Familias_Estructura_familiar1`
@@ -181,7 +181,7 @@ CREATE TABLE IF NOT EXISTS `mydb`.`Familia` (
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
-CREATE INDEX `fk_Familias_Domicilio1_idx` ON `mydb`.`Familia` (`idDomicilio` ASC) VISIBLE;
+CREATE INDEX `fk_Familias_Domicilio1_idx` ON `mydb`.`Familia` (`idDomicili` ASC) VISIBLE;
 
 CREATE INDEX `fk_Familias_Estructura_familiar1_idx` ON `mydb`.`Familia` (`Estructura_familiar` ASC) VISIBLE;
 
@@ -283,6 +283,18 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
+-- Table `mydb`.`Genere`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `mydb`.`Genere` ;
+
+CREATE TABLE IF NOT EXISTS `mydb`.`Genere` (
+  `idGenere` INT NOT NULL AUTO_INCREMENT,
+  `Nom_genere` VARCHAR(45) NOT NULL,
+  PRIMARY KEY (`idGenere`))
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
 -- Table `mydb`.`Client`
 -- -----------------------------------------------------
 DROP TABLE IF EXISTS `mydb`.`Client` ;
@@ -291,13 +303,13 @@ CREATE TABLE IF NOT EXISTS `mydb`.`Client` (
   `idClient` INT NOT NULL AUTO_INCREMENT,
   `idFamilia` INT NOT NULL,
   `idRol` INT NOT NULL,
+  `idGenere` INT NOT NULL,
   `Nom` VARCHAR(45) NOT NULL,
   `Cognoms` VARCHAR(60) NOT NULL,
   `Telefon` VARCHAR(45) NULL,
   `Correu_electronic` VARCHAR(45) NULL,
   `Data_d_alta` DATE NOT NULL,
   `C_temps_a_lentitat` VARCHAR(45) NOT NULL,
-  `Genero` VARCHAR(45) NOT NULL,
   `Fecha_nacimiento` DATE NOT NULL,
   `C_edad` INT NOT NULL,
   `Data_baixa` DATE NULL,
@@ -309,7 +321,7 @@ CREATE TABLE IF NOT EXISTS `mydb`.`Client` (
   `idSebas` INT NOT NULL,
   `derivacio_serveis_socials` TINYINT NOT NULL,
   `Curs_actual` INT NULL,
-  PRIMARY KEY (`idClient`, `idFamilia`, `idRol`, `Pais_naixement`, `Risc`, `idSituacio_economica`, `idSebas`),
+  PRIMARY KEY (`idClient`, `idFamilia`, `idRol`, `idGenere`, `Pais_naixement`, `Risc`, `idSituacio_economica`, `idSebas`),
   CONSTRAINT `fk_Usuarios_Familias1`
     FOREIGN KEY (`idFamilia`)
     REFERENCES `mydb`.`Familia` (`idFamilia`)
@@ -354,6 +366,11 @@ CREATE TABLE IF NOT EXISTS `mydb`.`Client` (
     FOREIGN KEY (`Curs_actual`)
     REFERENCES `mydb`.`Curs_actual` (`idCurs_actual`)
     ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_Client_Genere1`
+    FOREIGN KEY (`idGenere`)
+    REFERENCES `mydb`.`Genere` (`idGenere`)
+    ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
@@ -375,6 +392,8 @@ CREATE INDEX `fk_Usuarios_Sebas1_idx` ON `mydb`.`Client` (`idSebas` ASC) VISIBLE
 
 CREATE INDEX `fk_Usuarios_Curs_actual2_idx` ON `mydb`.`Client` (`Curs_actual` ASC) VISIBLE;
 
+CREATE INDEX `fk_Client_Genere1_idx` ON `mydb`.`Client` (`idGenere` ASC) VISIBLE;
+
 
 -- -----------------------------------------------------
 -- Table `mydb`.`Client_has_Domicili`
@@ -391,7 +410,7 @@ CREATE TABLE IF NOT EXISTS `mydb`.`Client_has_Domicili` (
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_Usuarios_has_Domicilio_Domicilio1`
     FOREIGN KEY (`idDomicili`)
-    REFERENCES `mydb`.`Domicili` (`idDomicil`)
+    REFERENCES `mydb`.`Domicili` (`idDomicili`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
