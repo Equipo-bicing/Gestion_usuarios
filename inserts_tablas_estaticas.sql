@@ -317,3 +317,10 @@ INSERT INTO Genere (Nom_genere)
 VALUES ('Masculi'),
     ('Femeni'),
     ('Non binari');
+INSERT INTO `Estructura_familiar` (`Nom_est_fam`)
+VALUES ('biparental'),
+    ('monoparental (pare)'),
+    ('monoparental (mare)'),
+    ('tutor legal (extrafamiliar)'),
+    ('tutor legal (intrafamiliar)'),
+    ('divorci amb custòdia compartida');
