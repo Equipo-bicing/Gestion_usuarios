@@ -304,10 +304,11 @@ CREATE TABLE IF NOT EXISTS `mydb`.`Client` (
   `Pais_naixement` INT NOT NULL,
   `Risc` INT NOT NULL,
   `Resultat_academic` INT NOT NULL,
-  `Motiu_baixa` INT NOT NULL,
+  `Motiu_baixa` INT NULL,
   `idSituacio_economica` INT NOT NULL,
   `idSebas` INT NOT NULL,
-  `Curs_actual` INT NOT NULL,
+  `derivacio_serveis_socials` TINYINT NOT NULL,
+  `Curs_actual` INT NULL,
   PRIMARY KEY (`idClient`, `idFamilia`, `idRol`, `Pais_naixement`, `Risc`, `idSituacio_economica`, `idSebas`),
   CONSTRAINT `fk_Usuarios_Familias1`
     FOREIGN KEY (`idFamilia`)
@@ -462,6 +463,31 @@ ENGINE = InnoDB;
 CREATE INDEX `fk_Necessitats_especials_has_Usuarios_Usuarios1_idx` ON `mydb`.`Necessitats_especials_has_Client` (`idClient` ASC) VISIBLE;
 
 CREATE INDEX `fk_Necessitats_especials_has_Usuarios_Necessitats_especials_idx` ON `mydb`.`Necessitats_especials_has_Client` (`idNecessitat_especial` ASC) VISIBLE;
+
+
+-- -----------------------------------------------------
+-- Table `mydb`.`Persona_relacionada`
+-- -----------------------------------------------------
+DROP TABLE IF EXISTS `mydb`.`Persona_relacionada` ;
+
+CREATE TABLE IF NOT EXISTS `mydb`.`Persona_relacionada` (
+  `Client_idClient` INT NOT NULL,
+  `Client_idClient1` INT NOT NULL,
+  CONSTRAINT `fk_Client_has_Client_Client1`
+    FOREIGN KEY (`Client_idClient`)
+    REFERENCES `mydb`.`Client` (`idClient`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_Client_has_Client_Client2`
+    FOREIGN KEY (`Client_idClient1`)
+    REFERENCES `mydb`.`Client` (`idClient`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+CREATE INDEX `fk_Client_has_Client_Client2_idx` ON `mydb`.`Persona_relacionada` (`Client_idClient1` ASC) VISIBLE;
+
+CREATE INDEX `fk_Client_has_Client_Client1_idx` ON `mydb`.`Persona_relacionada` (`Client_idClient` ASC) VISIBLE;
 
 
 SET SQL_MODE=@OLD_SQL_MODE;
